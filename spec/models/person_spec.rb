@@ -12,7 +12,9 @@ describe Person do
       end
     end
     describe '#birthday' do
-      xit 'has a birthday'
+      it 'has a birthday' do
+        expect(person.birthday).to eq('October 10, 1950')
+      end
     end
     describe '#have_a_drink' do
       context 'if person is over 21' do
