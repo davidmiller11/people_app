@@ -21,6 +21,12 @@ class Person < ActiveRecord::Base
   def drive_a_car
     if !self.age_at_least(18)
       return "Not yet, youngin!"
+    elsif self.age_at_least(18) && self.license
+      if self.drinks < 3
+        return "Have fun driving home!"
+      else
+        return "Looks like a cab for you tonight!"
+      end
     end
   end
 

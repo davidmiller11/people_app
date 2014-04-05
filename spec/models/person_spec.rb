@@ -53,12 +53,17 @@ describe Person do
     end
 
     context 'if user is over 18 and has license' do
-      xit "allows person to drive" do
+      subject(:person2) {Person.create(:birth_date => '1990-1-1', :license => true, :drinks => 0)}
+      it "allows person to drive" do
+        expect(person2.drive_a_car).to eq("Have fun driving home!")
       end
     end
-    
+
     context 'if person is over 21, has license but is drunk' do
-      xit "returns string 'looks like a cab for you tonight'"
+      subject(:person3) {Person.create(:birth_date => '1993-1-1', :license => true, :drinks => 3)}
+      it "returns string 'looks like a cab for you tonight'" do
+        expect(person3.drive_a_car).to eq("Looks like a cab for you tonight!")
+      end
     end
   end
 
