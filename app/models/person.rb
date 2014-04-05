@@ -9,7 +9,6 @@ class Person < ActiveRecord::Base
 
   def have_a_drink
 
-
     if self.drinks == 3
       return "Go home, you're drunk!"
     elsif self.age_at_least(21)
@@ -20,7 +19,9 @@ class Person < ActiveRecord::Base
   end
 
   def drive_a_car
-  
+    if !self.age_at_least(18)
+      return "Not yet, youngin!"
+    end
   end
 
   def age_at_least(age)
