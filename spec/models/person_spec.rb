@@ -75,7 +75,9 @@ describe Person do
       end
     end
     context 'if person has 0 drinks' do
-      xit 'does not change drinks attr' do
+      subject(:person) {Person.create(:drinks => 0)}
+      it 'does not change drinks attr' do
+        expect{person.sober_up}.not_to change {person.drinks}
       end
     end
   end
