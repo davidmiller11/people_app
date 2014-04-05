@@ -11,16 +11,24 @@ class Person < ActiveRecord::Base
     dob = Time.parse(self.birthday)
     today = Time.now
 
-    if (today.year - dob.year) > 21
+    if self.drinks == 3
+      return "Go home, you're drunk!"
+    elsif (today.year - dob.year) > 21
       self.drinks += 1
     elsif (today.year - dob.year) > 20
       if (today.month > dob.month)
         self.drinks += 1
-      elsif (today.month = dob.month)
+      elsif (today.month == dob.month)
         if (today.day >= dob.day)
           self.drinks += 1
+        else
+          return "Wait a few years!"
         end 
+      else
+        return "Wait a few years!"
       end  
+    else
+      return "Wait a few years!"
     end
   end
 end

@@ -21,14 +21,25 @@ describe Person do
   
   describe '#have_a_drink' do
     context 'if person is over 21' do
-      subject(:person) { Person.create(:birth_date => '1950-10-10', :drinks => 0)}
+      subject(:person1) { Person.create(:birth_date => '1950-10-10', :drinks => 0)}
+      subject(:person2) { Person.create(:birth_date => '1950-10-10', :drinks => 3)}
+
       it "increases a person's drinks attr by 1" do
-        expect{person.have_a_drink}.to change{person.drinks}.by(1)
+        expect{person1.have_a_drink}.to change{person1.drinks}.by(1)
       end
-      xit "doesn't allow more than 3 drinks and returns string 'Go home you're drunk'"
+
+      context 'if person has already had 3 drinks' do
+        it "doesn't allow more than 3 drinks and returns string 'Go home, you're drunk!'" do
+          expect(person2.have_a_drink).to eq("Go home, you're drunk!")
+        end
+      end
     end
+
     context 'if person is under 21' do
-      xit "returns a string 'wait a few years'" do
+      subject(:person1) {Person.create(:birth_date => '1993-6-1', :drinks => 0)}
+      it "returns a string 'Wait a few years!'" do
+        # expect{person1.have_a_drink}.not_to change{person1.drinks}
+        expect(person1.have_a_drink).to eq("Wait a few years!")
       end
     end
   end
