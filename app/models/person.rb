@@ -8,27 +8,41 @@ class Person < ActiveRecord::Base
   end
 
   def have_a_drink
-    dob = Time.parse(self.birthday)
-    today = Time.now
+
 
     if self.drinks == 3
       return "Go home, you're drunk!"
-    elsif (today.year - dob.year) > 21
+    elsif self.age_at_least(21)
       self.drinks += 1
-    elsif (today.year - dob.year) > 20
-      if (today.month > dob.month)
-        self.drinks += 1
-      elsif (today.month == dob.month)
-        if (today.day >= dob.day)
-          self.drinks += 1
-        else
-          return "Wait a few years!"
-        end 
-      else
-        return "Wait a few years!"
-      end  
     else
       return "Wait a few years!"
+    end
+  end
+
+  def drive_a_car
+  
+  end
+
+  def age_at_least(age)
+    dob = Time.parse(self.birthday)
+    today = Time.now
+
+    if (today.year - dob.year) > age
+      return true
+    elsif (today.year - dob.year) > (age - 1)
+      if (today.month > dob.month)
+        return true
+      elsif (today.month == dob.month)
+        if (today.day >= dob.day)
+          return true
+        else
+          return false
+        end 
+      else
+        return false
+      end  
+    else
+      return false
     end
   end
 end

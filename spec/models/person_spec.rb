@@ -38,7 +38,7 @@ describe Person do
     context 'if person is under 21' do
       subject(:person1) {Person.create(:birth_date => '1993-6-1', :drinks => 0)}
       it "returns a string 'Wait a few years!'" do
-        # expect{person1.have_a_drink}.not_to change{person1.drinks}
+        expect{person1.have_a_drink}.not_to change{person1.drinks}
         expect(person1.have_a_drink).to eq("Wait a few years!")
       end
     end
@@ -46,7 +46,9 @@ describe Person do
 
   describe '#drive_a_car' do
     context 'if user is under 18' do
-      xit "returns a string 'not yet youngin'" do
+      subject(:person1) {Person.create(:birth_date => '2000-5-5')}
+      xit "returns a string 'Not yet, youngin!'" do
+        expect(person1.drive_a_car).to eq("Not yet, youngin!")
       end
     end
     context 'if user is over 18 and has license' do
