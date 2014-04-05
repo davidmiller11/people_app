@@ -69,7 +69,9 @@ describe Person do
 
   describe '#sober_up' do
     context 'if person has had drinks' do
-      xit 'decreases drinks attr by 1' do
+      subject(:person) {Person.create(:drinks => 2)}
+      it 'decreases drinks attr by 1' do
+        expect{person.sober_up}.to change {person.drinks}.by(-1)
       end
     end
     context 'if person has 0 drinks' do

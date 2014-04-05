@@ -30,6 +30,13 @@ class Person < ActiveRecord::Base
     end
   end
 
+  def sober_up
+    if self.drinks > 0
+      self.drinks -= 1
+      self.save
+    end
+  end
+
   def age_at_least(age)
     dob = Time.parse(self.birthday)
     today = Time.now
