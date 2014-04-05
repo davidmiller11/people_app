@@ -3,7 +3,7 @@ require 'spec_helper'
 
 describe Person do
   context 'when a Person is created' do
-    subject(:person) { Person.new(  :first_name => 'John',
+    subject(:person) { Person.create(  :first_name => 'John',
                                 :last_name => 'Rambo',
                                 :birth_date => '1950-10-10')}
     describe '#name' do
@@ -11,20 +11,24 @@ describe Person do
         expect(person.full_name).to eq('John Rambo')
       end
     end
+
     describe '#birthday' do
       it 'has a birthday' do
-        expect(person.birthday).to eq('October 10, 1950')
+        expect(person.birthday).to eq('1950-10-10')
       end
     end
-    describe '#have_a_drink' do
-      context 'if person is over 21' do
-        xit "increases a person's drinks attr by 1" do
-        end
-        xit "doesn't allow more than 3 drinks and returns string 'Go home you're drunk'"
+  end
+  
+  describe '#have_a_drink' do
+    context 'if person is over 21' do
+      subject(:person) { Person.create(:birth_date => '1950-10-10', :drinks => 0)}
+      it "increases a person's drinks attr by 1" do
+        expect{person.have_a_drink}.to change{person.drinks}.by(1)
       end
-      context 'if person is under 21' do
-        xit "returns a string 'wait a few years'" do
-        end
+      xit "doesn't allow more than 3 drinks and returns string 'Go home you're drunk'"
+    end
+    context 'if person is under 21' do
+      xit "returns a string 'wait a few years'" do
       end
     end
   end
